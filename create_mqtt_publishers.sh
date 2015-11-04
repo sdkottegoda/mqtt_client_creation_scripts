@@ -9,7 +9,7 @@ read -p "Enter the QOS level (Default is set to QOS 0): " qos_num
 case $qos_num in
         1 ) qos='mqtt_at_least_once';;
         2 ) qos='mqtt_exactly_once';;
-	* ) qos='mqtt_at_most_once';;
+	* ) qos='mqtt_at_most_once'; qos_num=0;;
 esac
 #echo $qos
 
@@ -24,7 +24,7 @@ read -p "Retain messages(true/false)?" retain_messags
 if [ "$retain_messags" != "true" ]; then
   retain_messags=false
 fi
-echo retain=$retain_messags
+#echo retain=$retain_messags
 
 #Set hosts
 declare -a hosts=($hosts_string)
@@ -32,7 +32,7 @@ num_nodes=${#hosts[@]}
 #echo $num_nodes
 
 #Start writing the .jmx file
-jmx_file=../MQTT_NODE_$num_nodes\_TOPIC_$num_topics\_PUBLISHER_$num_publishers.jmx
+jmx_file=MQTT_NODE_$num_nodes\_TOPIC_$num_topics\_PUBLISHER_$num_publishers\_QOS_$qos_num.jmx
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
  <jmeterTestPlan version=\"1.2\" properties=\"2.8\" jmeter=\"2.13 r1665067\">

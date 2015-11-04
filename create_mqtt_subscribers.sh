@@ -9,7 +9,7 @@ read -p "Enter the QOS level (Default is set to QOS 0): " qos_num
 case $qos_num in
         1 ) qos='mqtt_at_least_once';;
         2 ) qos='mqtt_exactly_once';;
-	* ) qos='mqtt_at_most_once';;
+	* ) qos='mqtt_at_most_once'; qos_num=0;;
 esac
 #echo $qos
 
@@ -27,7 +27,7 @@ num_nodes=${#hosts[@]}
 #echo $num_nodes
 
 #Start writing the .jmx file
-jmx_file=../MQTT_NODE_$num_nodes\_TOPIC_$num_topics\_SUBSCRIBER_$num_subscribers.jmx
+jmx_file=MQTT_NODE_$num_nodes\_TOPIC_$num_topics\_SUBSCRIBER_$num_subscribers\_QOS_$qos_num\_CLEAN_$clean_session.jmx
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
  <jmeterTestPlan version=\"1.2\" properties=\"2.8\" jmeter=\"2.13 r1665067\">
