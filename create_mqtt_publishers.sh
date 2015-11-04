@@ -20,7 +20,7 @@ read -p "Enter required tps: " tps
 tpm=`expr $tps \* 60`
 
 #Set retain true/false
-read -p "Retain messages(true/false)?" retain_messags
+read -p "Retain messages(true/false)? " retain_messags
 if [ "$retain_messags" != "true" ]; then
   retain_messags=false
 fi
@@ -133,3 +133,8 @@ echo       "<Summariser guiclass=\"SummariserGui\" testclass=\"Summariser\" test
     </hashTree>
   </hashTree>
 </jmeterTestPlan>" >> $jmx_file
+
+jmeterBinary="/mnt/Data/opt/apache-jmeter-2.7/bin/jmeter"
+#jmeterBinary="/home/sasikala/Documents/MB/apache-jmeter-2.13/bin/jmeter"
+nohup $jmeterBinary -n -t $jmx_file > /tmp/test_publisher_result.txt &
+

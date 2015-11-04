@@ -14,7 +14,7 @@ esac
 #echo $qos
 
 #Set clean session true/false
-read -p "Set clean session to true(y/n)?" allow_clean_session
+read -p "Set clean session to true(y/n)? " allow_clean_session
 clean_session=true
 if [ "$allow_clean_session" = "n" ]; then
   clean_session=false
@@ -117,3 +117,7 @@ echo       "<Summariser guiclass=\"SummariserGui\" testclass=\"Summariser\" test
     </hashTree>
   </hashTree>
 </jmeterTestPlan>" >> $jmx_file
+
+jmeterBinary="/mnt/Data/opt/apache-jmeter-2.7/bin/jmeter"
+#jmeterBinary="/home/sasikala/Documents/MB/apache-jmeter-2.13/bin/jmeter"
+nohup $jmeterBinary -n -t $jmx_file > /tmp/mqtt_subscriber_result.txt &
